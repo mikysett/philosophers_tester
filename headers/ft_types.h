@@ -7,13 +7,15 @@ typedef enum e_exit_code
 	CANT_RUN_PHILO,
 	WRONG_ARGUMENTS,
 	TAKEN_BUSY_FORK,
-	PHILO_DIED,
+	EATING_WITH_WRONG_FORKS,
 	DEATH_NOT_REPORTED,
 	INSTRUCTIONS_AFTER_DEATH,
 	EAT_TOO_FAST,
 	SLEEP_TOO_FAST,
+	WRONG_DEATH_REPORT,
 	WRONG_STATUS_ORDER,
 	WRONG_NUMBER_OF_MEALS,
+	WRONG_TIMESTAMP_ORDER,
 	INVALID_LINE
 }			t_exit_code;
 
@@ -31,8 +33,9 @@ typedef struct s_philo
 	int				id;
 	t_philo_state	state;
 	int				forks_in_hand;
-	int				last_eat_timestamp;
-	int				last_sleep_timestamp;
+	int				last_eat_ts;
+	int				last_sleep_ts;
+	int				nb_meals;
 }			t_philo;
 
 typedef struct s_data
@@ -45,12 +48,14 @@ typedef struct s_data
 	int			time_to_eat;
 	int			time_to_sleep;
 	int			nb_times_to_eat;
-	int			last_timestamp;
+	int			last_ts;
 	t_philo		*philo;
 
 	int			philo_output_fd;
 	char		*philo_output_line;
 	int			philo_output_line_nb;
+
+	bool		death_reported;
 }			t_data;
 
 typedef enum e_pipe_side
@@ -61,7 +66,7 @@ typedef enum e_pipe_side
 
 typedef struct s_instruction
 {
-	int				timestamp;
+	int				ts;
 	int				philo_id;
 	t_philo_state	action;
 }			t_instruction;

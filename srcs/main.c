@@ -8,15 +8,6 @@ int	main(int argc, char **argv)
 	data.philo_output_fd = ft_take_philo_output(&data);
 	ft_check_output(&data);
 	close(data.philo_output_fd);
-	// printf("philo output:\n");
-	// char	buf[201];
-	// int		nb_char_read;
-	// while ((nb_char_read = read(data.philo_output_fd, buf, 200)) > 0)
-	// {
-	// 	buf[nb_char_read] = '\0';
-	// 	printf("%s\n", buf);
-	// }
-
 	ft_free_data(&data);
 	return (0);
 }
@@ -31,7 +22,7 @@ void	ft_exit_error(t_data *data, t_exit_code exit_code)
 	if (data && data->philo_output_line_nb > 0)
 		printf("> LINE %d: %s\n",
 			data->philo_output_line_nb,
-			data->philo_output_line);
+			ft_str_replace(data->philo_output_line, '_', ' '));
 	exit(EXIT_FAILURE);
 }
 
@@ -39,12 +30,30 @@ char	*set_err_str(t_exit_code exit_code)
 {
 	if (exit_code == WRONG_ARGUMENTS)
 		return(ft_strdup("ARGUMENTS ARE WRONG - PROGRAM DIDN'T RUN"));
-	if (exit_code == MEMORY_FAIL)
+	else if (exit_code == MEMORY_FAIL)
 		return(ft_strdup("MALLOC FAILED IN TESTER"));
-	if (exit_code == CANT_RUN_PHILO)
+	else if (exit_code == CANT_RUN_PHILO)
 		return(ft_strdup("CAN'T RUN PHILO (MAYBE EXECVE OR FORK FAILED)"));
-	if (exit_code == INVALID_LINE)
+	else if (exit_code == INVALID_LINE)
 		return(ft_strdup("INVALID LINE"));
+	else if (exit_code == WRONG_TIMESTAMP_ORDER)
+		return(ft_strdup("TIMESTAMP SMALLER THAN PREVIOUS ONE"));
+	else if (exit_code == DEATH_NOT_REPORTED)
+		return(ft_strdup("DEATH NOT REPORTED (IN A TIMELY MANNER)"));
+	else if (exit_code == INSTRUCTIONS_AFTER_DEATH)
+		return(ft_strdup("INSTRUCTIONS AFTER DEATH REPORTED"));
+	else if (exit_code == WRONG_DEATH_REPORT)
+		return(ft_strdup("WRONG DEATH REPORT"));
+	else if (exit_code == WRONG_STATUS_ORDER)
+		return(ft_strdup("WRONG STATUS ORDER"));
+	else if (exit_code == SLEEP_TOO_FAST)
+		return(ft_strdup("SLEEP TOO FAST"));
+	else if (exit_code == EAT_TOO_FAST)
+		return(ft_strdup("EAT TOO FAST"));
+	else if (exit_code == EATING_WITH_WRONG_FORKS)
+		return(ft_strdup("EATING WITH WRONG NUMBER OF FORKS"));
+	else if (exit_code == TAKEN_BUSY_FORK)
+		return(ft_strdup("TAKEN AN ALREADY BUSY FORK"));
 	else
 		return(ft_strdup("UNKNOWN ERROR"));
 }
@@ -56,4 +65,18 @@ void	ft_free_data(t_data *data)
 		if (data->philo)
 			free(data->philo);
 	}
+}
+
+char	*ft_str_replace(char *s, char original, char replacement)
+{
+	char	*o_str;
+
+	o_str = s;
+	while (*s)
+	{
+		if (*s == original)
+			*s = replacement;
+		s++;
+	}
+	return (o_str);
 }

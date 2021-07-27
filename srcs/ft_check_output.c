@@ -9,7 +9,9 @@ void	ft_check_output(t_data *data)
 		&data->philo_output_line) > 0)
 	{
 		curr_instr = ft_parse_instruction(data, data->philo_output_line);
-		ft_print_instruction(data, curr_instr);
+		ft_check_instruction(data, curr_instr);
+		if (SHOW_PHILO_OUTPUT)
+			ft_print_instruction(data);
 		data->philo_output_line_nb++;
 		free(data->philo_output_line);
 	}
@@ -25,7 +27,7 @@ t_instruction	ft_parse_instruction(t_data *data, char *line)
 	instr = ft_split(line, ' ');
 	if (ft_str_arr_size(instr) != 3)
 		ft_exit_error(data, INVALID_LINE);
-	final_instr.timestamp = ft_set_timestamp(data, instr[0]);
+	final_instr.ts = ft_set_timestamp(data, instr[0]);
 	final_instr.philo_id = ft_set_philo_id(data, instr[1]);
 	final_instr.action = ft_set_action(data, instr[2]);
 	ft_free_str_arr(instr);
@@ -68,14 +70,14 @@ int	ft_str_arr_size(char **str_arr)
 
 int	ft_set_timestamp(t_data *data, char *timestamp_str)
 {
-	int	timestamp;
+	int	ts;
 
 	if (!ft_is_number(timestamp_str) || !ft_is_int(timestamp_str))
 		ft_exit_error(data, INVALID_LINE);
-	timestamp = ft_atoi(timestamp_str);
-	if (timestamp < 0)
+	ts = ft_atoi(timestamp_str);
+	if (ts < 0)
 		ft_exit_error(data, INVALID_LINE);
-	return (timestamp);
+	return (ts);
 }
 
 int	ft_set_philo_id(t_data *data, char *id_str)
@@ -85,7 +87,7 @@ int	ft_set_philo_id(t_data *data, char *id_str)
 	if (!ft_is_number(id_str) || !ft_is_int(id_str))
 		ft_exit_error(data, INVALID_LINE);
 	philo_id = ft_atoi(id_str);
-	if (philo_id < 0 || philo_id > data->nb_philo)
+	if (philo_id < 1 || philo_id > data->nb_philo)
 		ft_exit_error(data, INVALID_LINE);
 	return (philo_id);
 }
@@ -94,6 +96,7 @@ t_philo_state	ft_set_action(t_data *data, char *action_str)
 {
 	t_philo_state	action;
 
+	action = dead;
 	if (!strcmp(action_str, "has_taken_a_fork"))
 		action = fork_taken;
 	else if (!strcmp(action_str, "is_eating"))
@@ -109,11 +112,12 @@ t_philo_state	ft_set_action(t_data *data, char *action_str)
 	return (action);
 }
 
-void	ft_print_instruction(t_data *data, t_instruction instr)
+void	ft_print_instruction(t_data *data)
 {
-	printf("Line: %s\n", data->philo_output_line);
-	printf("%10d philo_id: %2d action: %d\n\n",
-		instr.timestamp,
-		instr.philo_id,
-		instr.action);
+	static int	line_nb = 1;
+
+	printf("Line %3d: %s\n",
+		line_nb,
+		ft_str_replace(data->philo_output_line, '_', ' '));
+	line_nb++;
 }

@@ -2,7 +2,10 @@
 # define PHILOSOPHERS_TESTER_H
 
 # define PATH_PHILO "../philosophers/"
-# define DEFAULT_NB_TIMES_TO_EAT 20
+# define SHOW_PHILO_OUTPUT			true
+# define DEFAULT_NB_TIMES_TO_EAT	20
+
+# define MAX_LAG_TOLERANCE			10
 
 # define CLR_WHITE "\033[0;37m"
 # define CLR_BLACK "\033[0;30m"
@@ -24,9 +27,11 @@
 # include "ft_init_data.h"
 # include "ft_take_philo_output.h"
 # include "ft_check_output.h"
+# include "ft_check_instruction.h"
 
 void	ft_exit_error(t_data *data, t_exit_code exit_code);
 char	*set_err_str(t_exit_code exit_code);
 void	ft_free_data(t_data *data);
+char	*ft_str_replace(char *s, char original, char replacement);
 
 #endif
