@@ -57,8 +57,9 @@ miniclean:
 clean:		miniclean
 			@make clean -C $(LIBFT)
 
-fclean:		clean
+fclean:		miniclean
 			$(RM) $(NAME)
+			@make fclean -C $(LIBFT)
 			printf "$(WHT)[$(YEL)$(NAME) BINARIES REMOVED$(WHT)]\n"
 
 re:			fclean all
