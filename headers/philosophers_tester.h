@@ -19,9 +19,11 @@
 # include <unistd.h>
 
 # include "libft.h"
+# include "get_next_line.h"
 # include "ft_types.h"
 # include "ft_init_data.h"
 # include "ft_take_philo_output.h"
+# include "ft_check_output.h"
 
 void	ft_exit_error(t_data *data, t_exit_code exit_code);
 char	*set_err_str(t_exit_code exit_code);

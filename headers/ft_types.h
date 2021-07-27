@@ -22,7 +22,8 @@ typedef enum e_philo_state
 	eating,
 	sleeping,
 	thinking,
-	dead
+	dead,
+	fork_taken
 }			t_philo_state;	
 
 typedef struct s_philo
@@ -31,6 +32,7 @@ typedef struct s_philo
 	t_philo_state	state;
 	int				forks_in_hand;
 	int				last_eat_timestamp;
+	int				last_sleep_timestamp;
 }			t_philo;
 
 typedef struct s_data
@@ -43,6 +45,7 @@ typedef struct s_data
 	int			time_to_eat;
 	int			time_to_sleep;
 	int			nb_times_to_eat;
+	int			last_timestamp;
 	t_philo		*philo;
 
 	int			philo_output_fd;
@@ -55,5 +58,12 @@ typedef enum e_pipe_side
 	p_read = 0,
 	p_write = 1
 }				t_pipe_side;
+
+typedef struct s_instruction
+{
+	int				timestamp;
+	int				philo_id;
+	t_philo_state	action;
+}			t_instruction;
 
 #endif

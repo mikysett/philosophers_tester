@@ -13,7 +13,9 @@ t_data	ft_init_data(int argc, char **argv)
 	data.time_to_eat = ft_save_number(argv[4]);
 	data.time_to_sleep = ft_save_number(argv[5]);
 	data.nb_times_to_eat = ft_set_nb_times_to_eat(argc, argv);
+	data.last_timestamp = 0;
 	ft_init_philo(&data);
+	ft_init_philo_output(&data);
 	return (data);
 }
 
@@ -104,6 +106,14 @@ void	ft_init_philo(t_data *data)
 		data->philo[i].state = thinking;
 		data->philo[i].forks_in_hand = 0;
 		data->philo[i].last_eat_timestamp = 0;
+		data->philo[i].last_sleep_timestamp = 0;
 		i++;
 	}
+}
+
+void	ft_init_philo_output(t_data *data)
+{
+	data->philo_output_fd = 0;
+	data->philo_output_line = NULL;
+	data->philo_output_line_nb = 0;
 }

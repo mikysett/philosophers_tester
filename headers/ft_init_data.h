@@ -9,5 +9,6 @@ bool	ft_is_number(char *nb);
 bool	ft_is_int(char *nb);
 int		ft_set_nb_times_to_eat(int argc, char **argv);
 void	ft_init_philo(t_data *data);
+void	ft_init_philo_output(t_data *data);
 
 #endif
