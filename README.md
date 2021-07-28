@@ -2,7 +2,7 @@
 
 To clone with submodules: `git clone --recursive <project url>`
 
-Work in progress
+![Screenshot](screenshot.png)
 
 ## How to use it
 
