@@ -35,7 +35,7 @@ void	ft_run_instruction_action(t_data *data, t_instruction instr)
 	if (instr.action == dead)
 	{
 		if (data->philo[instr.philo_id - 1].last_eat_ts
-				+ data->time_to_die - instr.ts < 0)
+				+ data->time_to_die - instr.ts > 0)
 			ft_exit_error(data, WRONG_DEATH_REPORT);
 		data->philo[instr.philo_id - 1].state = dead;
 		data->death_reported = true;
@@ -91,6 +91,5 @@ void	ft_process_thinking(t_data *data, t_instruction instr)
 		&& instr.ts
 			- (data->philo[instr.philo_id - 1].last_sleep_ts + data->time_to_sleep) < 0)
 		ft_exit_error(data, SLEEP_TOO_FAST);
-	data->philo[instr.philo_id - 1].last_eat_ts = instr.ts;
 	data->philo[instr.philo_id - 1].state = thinking;
 }

@@ -129,6 +129,7 @@ void	ft_init_philo(t_data *data)
 		data->philo[i].forks_in_hand = 0;
 		data->philo[i].last_eat_ts = 0;
 		data->philo[i].last_sleep_ts = -1;
+		data->philo[i].nb_meals = 0;
 		i++;
 	}
 }

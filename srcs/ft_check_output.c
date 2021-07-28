@@ -16,7 +16,8 @@ void	ft_check_output(t_data *data)
 		free(data->philo_output_line);
 	}
 	ft_check_last_death(data);
-	ft_check_nb_meals(data);
+	if (!data->somebody_died)
+		ft_check_nb_meals(data);
 	free(data->philo_output_line);
 }
 
@@ -154,7 +155,7 @@ bool	ft_death_was_avoidable(t_data *data)
 			max_waiting_time += data->time_to_eat
 				- (data->time_to_sleep - data->time_to_eat);
 	}
-	if (max_waiting_time >= data->time_to_die)
+	if (max_waiting_time + MAX_LAG_TOLERANCE >= data->time_to_die)
 		return (false);
 	return (true);
 }
@@ -163,7 +164,7 @@ void	ft_print_instruction(t_data *data)
 {
 	static int	line_nb = 1;
 
-	printf("Line %3d: %s\n",
+	printf(" %3d: %s\n",
 		line_nb,
 		ft_str_replace(data->philo_output_line, '_', ' '));
 	line_nb++;
