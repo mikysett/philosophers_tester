@@ -12,6 +12,7 @@ typedef enum e_exit_code
 	INSTRUCTIONS_AFTER_DEATH,
 	EAT_TOO_FAST,
 	SLEEP_TOO_FAST,
+	AVOIDABLE_DEATH,
 	WRONG_DEATH_REPORT,
 	WRONG_STATUS_ORDER,
 	WRONG_NUMBER_OF_MEALS,
@@ -40,6 +41,7 @@ typedef struct s_philo
 
 typedef struct s_data
 {
+	char		**envp;
 	bool		is_philo_bonus;
 	char		full_path[200];
 
@@ -50,11 +52,13 @@ typedef struct s_data
 	int			nb_times_to_eat;
 	int			last_ts;
 	t_philo		*philo;
+	bool		*busy_forks;
 
 	int			philo_output_fd;
 	char		*philo_output_line;
 	int			philo_output_line_nb;
 
+	bool		somebody_died;
 	bool		death_reported;
 }			t_data;
 

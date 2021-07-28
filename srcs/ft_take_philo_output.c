@@ -12,7 +12,7 @@ int	ft_take_philo_output(t_data *data)
 	if (philo_pid == 0)
 	{
 		dup2(pipefd[p_write], STDOUT_FILENO);
-		if (execve(data->full_path, philo_args, NULL) == -1)
+		if (execve(data->full_path, philo_args, data->envp) == -1)
 			ft_exit_error(NULL, CANT_RUN_PHILO);
 	}
 	else if (philo_pid == -1)

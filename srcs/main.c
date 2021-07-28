@@ -1,13 +1,14 @@
 #include "philosophers_tester.h"
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
-	data = ft_init_data(argc, argv);
+	data = ft_init_data(argc, argv, envp);
 	data.philo_output_fd = ft_take_philo_output(&data);
 	ft_check_output(&data);
 	close(data.philo_output_fd);
+	ft_print_success(&data);
 	ft_free_data(&data);
 	return (0);
 }
@@ -54,8 +55,22 @@ char	*set_err_str(t_exit_code exit_code)
 		return(ft_strdup("EATING WITH WRONG NUMBER OF FORKS"));
 	else if (exit_code == TAKEN_BUSY_FORK)
 		return(ft_strdup("TAKEN AN ALREADY BUSY FORK"));
+	else if (exit_code == AVOIDABLE_DEATH)
+		return(ft_strdup("THIS DEATH WAS AVOIDABLE (MAYBE DUE TO SYSTEM LAG)"));
+	else if (exit_code == WRONG_NUMBER_OF_MEALS)
+		return(ft_strdup("WRONG NUMBER OF MEALS"));
 	else
 		return(ft_strdup("UNKNOWN ERROR"));
+}
+
+void	ft_print_success(t_data *data)
+{
+	printf("%s", CLR_GREEN);
+	if (data->somebody_died)
+		printf("OK (SOMEBODY DIED BUT IT WAS INEVITABLE)\n");
+	else
+		printf("OK (NOBODY DIED)\n");
+	printf("%s", CLR_WHITE);
 }
 
 void	ft_free_data(t_data *data)

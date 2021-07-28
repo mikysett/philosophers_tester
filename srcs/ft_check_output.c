@@ -15,6 +15,8 @@ void	ft_check_output(t_data *data)
 		data->philo_output_line_nb++;
 		free(data->philo_output_line);
 	}
+	ft_check_last_death(data);
+	ft_check_nb_meals(data);
 	free(data->philo_output_line);
 }
 
@@ -112,6 +114,51 @@ t_philo_state	ft_set_action(t_data *data, char *action_str)
 	return (action);
 }
 
+void	ft_check_nb_meals(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		if (data->philo[i].nb_meals != data->nb_times_to_eat)
+			ft_exit_error(data, WRONG_NUMBER_OF_MEALS);
+		i++;
+	}
+}
+
+void	ft_check_last_death(t_data *data)
+{
+	if (data->somebody_died)
+	{
+		if (!data->death_reported)
+			ft_exit_error(data, DEATH_NOT_REPORTED);
+		else if (ft_death_was_avoidable(data))
+			ft_exit_error(data, AVOIDABLE_DEATH);
+	}
+}
+
+bool	ft_death_was_avoidable(t_data *data)
+{
+	int	max_waiting_time;
+
+	if (data->nb_philo <= 1)
+		return (false);
+	max_waiting_time = data->time_to_eat
+		+ ft_bigger(data->time_to_eat, data->time_to_sleep);
+	if (data->nb_philo % 2 == 1)
+	{
+		if (data->time_to_eat >= data->time_to_sleep)
+			max_waiting_time += data->time_to_eat;
+		else if (data->time_to_sleep - data->time_to_eat < data->time_to_eat)
+			max_waiting_time += data->time_to_eat
+				- (data->time_to_sleep - data->time_to_eat);
+	}
+	if (max_waiting_time >= data->time_to_die)
+		return (false);
+	return (true);
+}
+
 void	ft_print_instruction(t_data *data)
 {
 	static int	line_nb = 1;
@@ -120,4 +167,9 @@ void	ft_print_instruction(t_data *data)
 		line_nb,
 		ft_str_replace(data->philo_output_line, '_', ' '));
 	line_nb++;
+}
+
+int		ft_bigger(int nb1, int nb2)
+{
+	return (nb1 > nb2 ? nb1 : nb2);
 }

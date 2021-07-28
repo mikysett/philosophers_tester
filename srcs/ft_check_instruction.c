@@ -22,6 +22,7 @@ void	ft_check_philo_died(t_data *data, int timestamp)
 				+ data->time_to_die);
 		if (died_since >= 0)
 		{
+			data->somebody_died = true;
 			if (died_since > MAX_LAG_TOLERANCE)
 				ft_exit_error(data, DEATH_NOT_REPORTED);
 		}
@@ -43,7 +44,10 @@ void	ft_run_instruction_action(t_data *data, t_instruction instr)
 	if (instr.action == eating)
 		ft_process_eating(data, instr);
 	else if (instr.action == sleeping)
+	{
 		ft_process_sleeping(data, instr);
+		ft_process_forks_release(data, instr);
+	}
 	else if (instr.action == thinking)
 		ft_process_thinking(data, instr);
 	else if (instr.action == fork_taken)
@@ -89,41 +93,4 @@ void	ft_process_thinking(t_data *data, t_instruction instr)
 		ft_exit_error(data, SLEEP_TOO_FAST);
 	data->philo[instr.philo_id - 1].last_eat_ts = instr.ts;
 	data->philo[instr.philo_id - 1].state = thinking;
-}
-
-void	ft_process_fork_taken(t_data *data, t_instruction instr)
-{
-	ft_check_available_forks(data, instr);
-	data->philo[instr.philo_id - 1].forks_in_hand++;
-}
-
-void	ft_check_available_forks(t_data *data, t_instruction instr)
-{
-	int	max_forks;
-	int	available_forks;
-
-	max_forks = data->nb_philo >= 2 ? 2 : 1;
-	available_forks = max_forks;
-	if (data->philo[previous(instr.philo_id - 1, data->nb_philo)].forks_in_hand > 0)
-		available_forks--;
-	available_forks -= data->philo[instr.philo_id - 1].forks_in_hand;
-	if (data->nb_philo >= 2
-		&& data->philo[next(instr.philo_id - 1, data->nb_philo)].forks_in_hand > 0)
-		available_forks--;
-	if (available_forks <= 0)
-		ft_exit_error(data, TAKEN_BUSY_FORK);
-}
-
-int	previous(int i, int size)
-{
-	if (i == 0)
-		return (size - 1);
-	return (i - 1);
-}
-
-int	next(int i, int size)
-{
-	if (i == size - 1)
-		return (0);
-	return (i + 1);
 }

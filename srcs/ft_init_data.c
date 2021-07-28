@@ -1,6 +1,6 @@
 #include "philosophers_tester.h"
 
-t_data	ft_init_data(int argc, char **argv)
+t_data	ft_init_data(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
@@ -15,8 +15,11 @@ t_data	ft_init_data(int argc, char **argv)
 	data.nb_times_to_eat = ft_set_nb_times_to_eat(argc, argv);
 	data.last_ts = 0;
 	ft_init_philo(&data);
+	ft_init_forks(&data);
 	ft_init_philo_output(&data);
+	data.somebody_died = false;
 	data.death_reported = false;
+	data.envp = envp;
 	return (data);
 }
 
@@ -34,11 +37,10 @@ bool	ft_set_bonus(char *philo_prog_type)
 void	ft_set_full_path(t_data *data)
 {
 	data->full_path[0] = '\0';
-	strcat(data->full_path, PATH_PHILO);
 	if (!data->is_philo_bonus)
-		strcat(data->full_path, "philo");
+		strcat(data->full_path, PATH_PHILO);
 	else
-		strcat(data->full_path, "philo_bonus");
+		strcat(data->full_path, PATH_PHILO_BONUS);
 }
 
 int		ft_save_number(char *arr_nb)
@@ -129,6 +131,13 @@ void	ft_init_philo(t_data *data)
 		data->philo[i].last_sleep_ts = -1;
 		i++;
 	}
+}
+
+void	ft_init_forks(t_data *data)
+{
+	data->busy_forks = ft_calloc(data->nb_philo, sizeof(bool));
+	if (!data->busy_forks)
+		ft_exit_error(NULL, MEMORY_FAIL);
 }
 
 void	ft_init_philo_output(t_data *data)
