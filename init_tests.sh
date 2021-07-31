@@ -12,6 +12,10 @@ cmd+=("$tester_pathname NO_BONUS 2 400 100 100")
 
 cmd+=("$tester_pathname NO_BONUS 4 300 100 100")
 
+cmd+=("$tester_pathname NO_BONUS 4 300 300 100 1")
+
+cmd+=("$tester_pathname NO_BONUS 4 300 400 100 1")
+
 cmd+=("$tester_pathname NO_BONUS 4 300 20 100")
 
 cmd+=("$tester_pathname NO_BONUS 4 300 200 10")
