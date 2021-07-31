@@ -4,7 +4,7 @@
 # define PATH_PHILO			"../philo/philo"
 # define PATH_PHILO_BONUS	"../philo_bonus/philo_bonus"
 # define SHOW_PHILO_OUTPUT			true
-# define DEFAULT_NB_TIMES_TO_EAT	20
+# define DEFAULT_NB_TIMES_TO_EAT	4
 
 # define MAX_LAG_TOLERANCE			10
 
