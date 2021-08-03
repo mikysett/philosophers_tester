@@ -24,6 +24,7 @@ void	ft_exit_error(t_data *data, t_exit_code exit_code)
 		printf("> LINE %d: %s\n",
 			data->philo_output_line_nb,
 			ft_str_replace(data->philo_output_line, '_', ' '));
+	ft_print_nb_meals(data);
 	exit(EXIT_FAILURE);
 }
 
@@ -94,4 +95,19 @@ char	*ft_str_replace(char *s, char original, char replacement)
 		s++;
 	}
 	return (o_str);
+}
+
+void	ft_print_nb_meals(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	printf(" MEALS RECAP:\n");
+	while (i < data->nb_philo)
+	{
+		printf("philo %d - nb_meals: %d\n",
+			data->philo[i].id,
+			data->philo[i].nb_meals);
+		i++;
+	}
 }

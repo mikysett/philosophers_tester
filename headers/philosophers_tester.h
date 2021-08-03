@@ -4,7 +4,7 @@
 # define PATH_PHILO			"../philo/philo"
 # define PATH_PHILO_BONUS	"../philo_bonus/philo_bonus"
 # define SHOW_PHILO_OUTPUT			true
-# define DEFAULT_NB_TIMES_TO_EAT	4
+# define DEFAULT_NB_TIMES_TO_EAT	7
 
 # define MAX_LAG_TOLERANCE			10
 
@@ -36,5 +36,6 @@ char	*set_err_str(t_exit_code exit_code);
 void	ft_print_success(t_data *data);
 void	ft_free_data(t_data *data);
 char	*ft_str_replace(char *s, char original, char replacement);
+void	ft_print_nb_meals(t_data *data);
 
 #endif

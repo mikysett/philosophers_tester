@@ -12,7 +12,7 @@ To clone with submodules: `git clone --recursive <project url>`
 
 - Same for testing the bonus, the program should be named `philo_bonus` and be in the directory `philo_bonus` located next to the directory `philosophers_tester`.
 
-- The programm will set `nb_of_times_every_philo_must_eat` to 4 as default value (if you want to change this default you can modify `DEFAULT_NB_TIMES_TO_EAT` in `philosophers_tester.h`).
+- The programm will set `nb_of_times_every_philo_must_eat` to 7 as default value (if you want to change this default you can modify `DEFAULT_NB_TIMES_TO_EAT` in `philosophers_tester.h`).
 
 - By default the tester will show also the output of the philo program, to toggle it modifiy `SHOW_PHILO_OUTPUT` in `philosophers_tester.h`.
 
