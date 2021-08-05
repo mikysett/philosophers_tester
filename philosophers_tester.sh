@@ -7,7 +7,10 @@ export YEL="\033[0;33m"
 export BLU="\033[0;34m"
 export GRN="\033[0;32m"
 
-export tester_pathname=./philo_tester
+export philo_path=../philo/philo
+export philo_bonus_path=../philo_bonus/philo_bonus
+export tester=./philo_tester
+export default_nb_meals=7
 
 make all
 

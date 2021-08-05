@@ -5,7 +5,9 @@ void	ft_check_output(t_data *data)
 	t_instruction	curr_instr;
 
 	data->philo_output_line_nb = 1;
-	while (get_next_line(data->philo_output_fd,
+	// while (get_next_line(data->philo_output_fd,
+	// 	&data->philo_output_line) > 0)
+	while (get_next_line(STDIN_FILENO,
 		&data->philo_output_line) > 0)
 	{
 		curr_instr = ft_parse_instruction(data, data->philo_output_line);

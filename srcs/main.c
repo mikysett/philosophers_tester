@@ -1,13 +1,13 @@
 #include "philosophers_tester.h"
 
-int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	data = ft_init_data(argc, argv, envp);
-	data.philo_output_fd = ft_take_philo_output(&data);
+	data = ft_init_data(argc, argv);
+	// data.philo_output_fd = ft_take_philo_output(&data);
 	ft_check_output(&data);
-	close(data.philo_output_fd);
+	// close(data.philo_output_fd);
 	ft_print_success(&data);
 	ft_free_data(&data);
 	return (0);

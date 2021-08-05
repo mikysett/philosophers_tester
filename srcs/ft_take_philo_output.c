@@ -3,25 +3,25 @@
 int	ft_take_philo_output(t_data *data)
 {
 	char	**philo_args;
-	pid_t	philo_pid;
-	int		pipefd[2];
+	// pid_t	philo_pid;
+	// int		pipefd[2];
 
 	philo_args = ft_init_philo_args(data);
-	pipe(pipefd);
-	philo_pid = fork();
-	if (philo_pid == 0)
-	{
-		dup2(pipefd[p_write], STDOUT_FILENO);
-		if (execve(data->full_path, philo_args, data->envp) == -1)
-			ft_exit_error(NULL, CANT_RUN_PHILO);
-	}
-	else if (philo_pid == -1)
-		ft_exit_error(NULL, CANT_RUN_PHILO);
-	if (wait(NULL) == -1)
-		ft_exit_error(NULL, CANT_RUN_PHILO);
-	close(pipefd[p_write]);
-	ft_free_str_arr(philo_args);
-	return (pipefd[p_read]);
+	// pipe(pipefd);
+	// philo_pid = fork();
+	// if (philo_pid == 0)
+	// {
+	// 	dup2(pipefd[p_write], STDOUT_FILENO);
+	// 	if (execve(data->full_path, philo_args, data->envp) == -1)
+	// 		ft_exit_error(NULL, CANT_RUN_PHILO);
+	// }
+	// else if (philo_pid == -1)
+	// 	ft_exit_error(NULL, CANT_RUN_PHILO);
+	// if (wait(NULL) == -1)
+	// 	ft_exit_error(NULL, CANT_RUN_PHILO);
+	// close(pipefd[p_write]);
+	// ft_free_str_arr(philo_args);
+	// return (pipefd[p_read]);
 }
 
 char	**ft_init_philo_args(t_data *data)
