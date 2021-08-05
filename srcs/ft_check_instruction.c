@@ -20,7 +20,8 @@ void	ft_check_philo_died(t_data *data, int timestamp)
 	{
 		died_since = timestamp - (data->philo[i].last_eat_ts
 				+ data->time_to_die);
-		if (died_since >= 0)
+		if (data->philo[i].nb_meals != data->nb_times_to_eat
+			&& died_since >= 0)
 		{
 			data->somebody_died = true;
 			if (died_since > MAX_LAG_TOLERANCE)

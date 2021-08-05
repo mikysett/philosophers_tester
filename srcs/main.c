@@ -5,9 +5,7 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	data = ft_init_data(argc, argv);
-	// data.philo_output_fd = ft_take_philo_output(&data);
 	ft_check_output(&data);
-	// close(data.philo_output_fd);
 	ft_print_success(&data);
 	ft_free_data(&data);
 	return (0);
@@ -21,10 +19,12 @@ void	ft_exit_error(t_data *data, t_exit_code exit_code)
 	printf("%s%s%s\n", CLR_RED, err_str, CLR_WHITE);
 	free(err_str);
 	if (data && data->philo_output_line_nb > 0)
+	{
 		printf("> LINE %d: %s\n",
 			data->philo_output_line_nb,
 			ft_str_replace(data->philo_output_line, '_', ' '));
-	ft_print_nb_meals(data);
+		ft_print_nb_meals(data);
+	}
 	exit(EXIT_FAILURE);
 }
 

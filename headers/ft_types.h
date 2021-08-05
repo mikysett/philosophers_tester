@@ -41,10 +41,7 @@ typedef struct s_philo
 
 typedef struct s_data
 {
-	// char		**envp;
 	bool		is_philo_bonus;
-	// char		full_path[200];
-
 	int			nb_philo;
 	int			time_to_die;
 	int			time_to_eat;
@@ -54,19 +51,12 @@ typedef struct s_data
 	t_philo		*philo;
 	bool		*busy_forks;
 
-	// int			philo_output_fd;
 	char		*philo_output_line;
 	int			philo_output_line_nb;
 
 	bool		somebody_died;
 	bool		death_reported;
 }			t_data;
-
-// typedef enum e_pipe_side
-// {
-// 	p_read = 0,
-// 	p_write = 1
-// }				t_pipe_side;
 
 typedef struct s_instruction
 {

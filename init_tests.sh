@@ -9,9 +9,6 @@ export cmd
 args="1 800 200 200 $default_nb_meals"
 cmd+=("$philo_path $args | $tester NO_BONUS $args")
 
-args="5 800 200 200 $default_nb_meals"
-cmd+=("$philo_path $args | $tester NO_BONUS $args")
-
 args="5 800 200 200 7"
 cmd+=("$philo_path $args | $tester NO_BONUS $args")
 

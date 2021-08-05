@@ -7,7 +7,6 @@ t_data	ft_init_data(int argc, char **argv)
 	if (argc < 6 || argc > 7)
 		ft_exit_error(NULL, WRONG_ARGUMENTS);
 	data.is_philo_bonus = ft_set_bonus(argv[1]);
-	// ft_set_full_path(&data);
 	data.nb_philo = ft_save_number(argv[2]);
 	data.time_to_die = ft_save_number(argv[3]);
 	data.time_to_eat = ft_save_number(argv[4]);
@@ -19,7 +18,6 @@ t_data	ft_init_data(int argc, char **argv)
 	ft_init_philo_output(&data);
 	data.somebody_died = false;
 	data.death_reported = false;
-	// data.envp = envp;
 	return (data);
 }
 
@@ -32,15 +30,6 @@ bool	ft_set_bonus(char *philo_prog_type)
 	else
 		ft_exit_error(NULL, WRONG_ARGUMENTS);
 	return (false);
-}
-
-void	ft_set_full_path(t_data *data)
-{
-	// data->full_path[0] = '\0';
-	// if (!data->is_philo_bonus)
-	// 	strcat(data->full_path, PATH_PHILO);
-	// else
-	// 	strcat(data->full_path, PATH_PHILO_BONUS);
 }
 
 int		ft_save_number(char *arr_nb)
@@ -143,7 +132,6 @@ void	ft_init_forks(t_data *data)
 
 void	ft_init_philo_output(t_data *data)
 {
-	// data->philo_output_fd = 0;
 	data->philo_output_line = NULL;
 	data->philo_output_line_nb = 0;
 }

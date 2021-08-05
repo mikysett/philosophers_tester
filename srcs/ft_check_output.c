@@ -5,10 +5,7 @@ void	ft_check_output(t_data *data)
 	t_instruction	curr_instr;
 
 	data->philo_output_line_nb = 1;
-	// while (get_next_line(data->philo_output_fd,
-	// 	&data->philo_output_line) > 0)
-	while (get_next_line(STDIN_FILENO,
-		&data->philo_output_line) > 0)
+	while (get_next_line(STDIN_FILENO, &data->philo_output_line) > 0)
 	{
 		curr_instr = ft_parse_instruction(data, data->philo_output_line);
 		ft_check_instruction(data, curr_instr);
@@ -157,7 +154,7 @@ bool	ft_death_was_avoidable(t_data *data)
 			max_waiting_time += data->time_to_eat
 				- (data->time_to_sleep - data->time_to_eat);
 	}
-	if (max_waiting_time + MAX_LAG_TOLERANCE >= data->time_to_die)
+	if (max_waiting_time + MAX_LAG_TOLERANCE > data->time_to_die)
 		return (false);
 	return (true);
 }
