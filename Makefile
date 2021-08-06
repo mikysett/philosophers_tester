@@ -30,7 +30,7 @@ DEPS	=	$(shell find $(HEADERS) -name *.h)
 
 CC		=	gcc
 
-CFLAGS	=	-Wall -Wextra -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror
 INCLUDES	= -I $(HEADERS) -I $(LIBFT)
 
 LIBS	=	-L./$(LIBFT) -lft
