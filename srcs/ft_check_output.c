@@ -121,7 +121,7 @@ void	ft_check_nb_meals(t_data *data)
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		if (data->philo[i].nb_meals != data->nb_times_to_eat)
+		if (data->philo[i].nb_meals < data->nb_times_to_eat)
 			ft_exit_error(data, WRONG_NUMBER_OF_MEALS);
 		i++;
 	}
